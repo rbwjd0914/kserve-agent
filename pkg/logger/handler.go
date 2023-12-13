@@ -17,6 +17,7 @@ limitations under the License.
 package logger
 
 import (
+	"os"
 	"bytes"
 	"io"
 	"net/http"
