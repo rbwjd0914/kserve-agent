@@ -85,6 +85,12 @@ func (eh *LoggerHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	// Get or Create an ID
 	id := getOrCreateID(r)
 	contentType := r.Header.Get("Content-Type")
+	xApiKey := r.Header.Get("X-API-KEY")
+	xTenant := r.Header.Get("X-TENANT")
+	xUser := r.Header.Get("X-USER")
+	xStorageUri := os.Getenv("X_STORAGE_URI")
+	xModel := os.Getenv("X_MODEL")
+	xRuntime := os.Getenv("X_RUNTIME")
 	// log Request
 	if eh.logMode == v1beta1.LogAll || eh.logMode == v1beta1.LogRequest {
 		if err := QueueLogRequest(LogRequest{
@@ -98,6 +104,12 @@ func (eh *LoggerHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 			Namespace:        eh.namespace,
 			Endpoint:         eh.endpoint,
 			Component:        eh.component,
+			xApiKey:          xApiKey,
+			xTenant:          xTenant,
+			xUser:            xUser,
+			xStorageUri:      xStorageUri,
+			xModel:           xModel,
+			xRuntime:         xRuntime,
 		}); err != nil {
 			eh.log.Error(err, "Failed to log request")
 		}
@@ -126,6 +138,12 @@ func (eh *LoggerHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 				Namespace:        eh.namespace,
 				Endpoint:         eh.endpoint,
 				Component:        eh.component,
+				xApiKey:          xApiKey,
+				xTenant:          xTenant,
+				xUser:            xUser,
+				xStorageUri:      xStorageUri,
+				xModel:           xModel,
+				xRuntime:         xRuntime,
 			}); err != nil {
 				eh.log.Error(err, "Failed to log response")
 			}
