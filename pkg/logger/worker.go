@@ -107,6 +107,12 @@ func (w *Worker) sendCloudEvent(logReq LogRequest) error {
 	event.SetExtension(NamespaceAttr, logReq.Namespace)
 	event.SetExtension(ComponentAttr, logReq.Component)
 	event.SetExtension(EndpointAttr, logReq.Endpoint)
+	event.SetExtension("xapikey", logReq.xApiKey)
+	event.SetExtension("xtenant", logReq.xTenant)
+	event.SetExtension("xuser", logReq.xUser)
+	event.SetExtension("xstorageuri", logReq.xStorageUri)
+	event.SetExtension("xmodel", logReq.xModel)
+	event.SetExtension("xruntime", logReq.xRuntime)
 
 	event.SetSource(logReq.SourceUri.String())
 	if logReq.ContentType != "" {

@@ -38,4 +38,10 @@ type LogRequest struct {
 	Namespace        string
 	Component        string
 	Endpoint         string
+	xApiKey          string
+    xTenant          string
+	xUser            string
+	xStorageUri      string
+	xModel           string
+	xRuntime         string
 }
