@@ -92,6 +92,15 @@ func (eh *LoggerHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	xStorageUri := os.Getenv("X_STORAGE_URI")
 	xModel := os.Getenv("X_MODEL")
 	xRuntime := os.Getenv("X_RUNTIME")
+
+	if xApiKey != ""{
+		hash := sha256.New()
+		hash.Write([]byte(data))
+		md := hash.Sum(nil)
+		mdHash = hex.EncodeToString(md)
+		xApiKey = mdHash
+	}
+	
 	// log Request
 	if eh.logMode == v1beta1.LogAll || eh.logMode == v1beta1.LogRequest {
 		if err := QueueLogRequest(LogRequest{
