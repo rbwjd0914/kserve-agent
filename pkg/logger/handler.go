@@ -97,7 +97,7 @@ func (eh *LoggerHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 
 	if xApiKey != ""{
 		hash := sha256.New()
-		hash.Write([]byte(data))
+		hash.Write([]byte(xApiKey))
 		md := hash.Sum(nil)
 		mdHash = hex.EncodeToString(md)
 		xApiKey = mdHash
