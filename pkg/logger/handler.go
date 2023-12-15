@@ -17,6 +17,8 @@ limitations under the License.
 package logger
 
 import (
+	"crypto/sha256"
+	"encoding/hex"
 	"os"
 	"bytes"
 	"io"
@@ -100,7 +102,7 @@ func (eh *LoggerHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		mdHash = hex.EncodeToString(md)
 		xApiKey = mdHash
 	}
-	
+
 	// log Request
 	if eh.logMode == v1beta1.LogAll || eh.logMode == v1beta1.LogRequest {
 		if err := QueueLogRequest(LogRequest{
