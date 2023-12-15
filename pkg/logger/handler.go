@@ -99,7 +99,7 @@ func (eh *LoggerHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		hash := sha256.New()
 		hash.Write([]byte(xApiKey))
 		md := hash.Sum(nil)
-		mdHash = hex.EncodeToString(md)
+		mdHash := hex.EncodeToString(md)
 		xApiKey = mdHash
 	}
 
