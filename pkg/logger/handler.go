@@ -91,6 +91,8 @@ func (eh *LoggerHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	xApiKey := r.Header.Get("X-API-KEY")
 	xTenant := r.Header.Get("X-TENANT")
 	xUser := r.Header.Get("X-USER")
+	xTransactionId := r.Header.Get("X-TRANSACTION-ID")
+	xOperationId := r.Header.Get("X-OPERATION-ID")
 	xStorageUri := os.Getenv("X_STORAGE_URI")
 	xModel := os.Getenv("X_MODEL")
 	xRuntime := os.Getenv("X_RUNTIME")
@@ -116,6 +118,8 @@ func (eh *LoggerHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 			Namespace:        eh.namespace,
 			Endpoint:         eh.endpoint,
 			Component:        eh.component,
+			xTransactionId:   xTransactionId,
+			xOperationId:     xOperationId,
 			xApiKey:          xApiKey,
 			xTenant:          xTenant,
 			xUser:            xUser,
@@ -150,6 +154,8 @@ func (eh *LoggerHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 				Namespace:        eh.namespace,
 				Endpoint:         eh.endpoint,
 				Component:        eh.component,
+				xTransactionId:   xTransactionId,
+				xOperationId:     xOperationId,
 				xApiKey:          xApiKey,
 				xTenant:          xTenant,
 				xUser:            xUser,

@@ -113,6 +113,8 @@ func (w *Worker) sendCloudEvent(logReq LogRequest) error {
 	event.SetExtension("xstorageuri", logReq.xStorageUri)
 	event.SetExtension("xmodel", logReq.xModel)
 	event.SetExtension("xruntime", logReq.xRuntime)
+	event.SetExtension("xtransactionid", logReq.xTransactionId)
+	event.SetExtension("xoperationid", logReq.xOperationId)
 
 	event.SetSource(logReq.SourceUri.String())
 	if logReq.ContentType != "" {
